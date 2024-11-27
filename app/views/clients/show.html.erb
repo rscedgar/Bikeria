@@ -1,0 +1,29 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @client %>
+
+<div>
+  <%= link_to "Edit this client", edit_client_path(@client) %> |
+  <%= link_to "Back to clients", clients_path %>
+
+  <%= button_to "Destroy this client", @client, method: :delete %>
+</div>
+
+<h2>Motocicletas</h2>
+<%= link_to 'Agregar Motocicleta', new_motorcycle_path(client_id: @client.id) %>
+<% if @motorcycles.any? %>
+  <ul>
+    <% @motorcycles.each do |motorcycle| %>
+      <li>
+        <strong>Nombre:</strong> <%= motorcycle.name %><br>
+        <strong>Placa:</strong> <%= motorcycle.plate_number %><br>
+        <strong>VIN:</strong> <%= motorcycle.vin %><br>
+        <strong>Historial de servicios:</strong> <%= motorcycle.service_history %><br>
+        <strong>Kilometraje:</strong> <%= motorcycle.mileage %> km<br>
+        <strong>Estado:</strong> <%= motorcycle.status %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No tiene motocicletas registradas.</p>
+<% end %>
