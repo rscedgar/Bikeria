@@ -1,1 +1,28 @@
-<h1>HEADER</h1>
+<header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand" href="#">
+      <img src="https://i.postimg.cc/T3Vg022V/logo.png" alt="Logo" width="100" height="auto">
+    </a>
+    <!-- Navbar Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="<%= root_path %>">Inico</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="<%= clients_path %>">Clientes</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="<%= motorcycles_path %>">Motocicletas</a>
+      </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</header>

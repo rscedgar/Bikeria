@@ -5,23 +5,31 @@
 
   <%= link_to "Agregar Cliente", new_client_path, class: 'btn btn-primary mb-3' %>
 
-  <table class="table table-striped">
+  <table class="table">
     <thead>
       <tr>
-        <th>Primer Nombre</th>
-        <th>Apellido</th>
+        <th>ID</th>
+        <th>Nombre</th>
         <th>Email</th>
         <th>Teléfono</th>
+        <th>Motocicletas</th>
+        <th>Status de Motos</th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
       <% @clients.each do |client| %>
         <tr>
-          <td><%= client.first_name %></td>
-          <td><%= client.last_name %></td>
+          <td><%= client.id %></td>
+          <td><%= "#{client.first_name} #{client.last_name}" %></td>
           <td><%= client.email %></td>
           <td><%= client.phone %></td>
+          <td><%= client.motorcycles.count %></td>
+          <td>
+            <% client.motorcycles.each do |motorcycle| %>
+              <p><strong><%= motorcycle.name %>:</strong> <%= motorcycle.status %></p>
+            <% end %>
+          </td>
           <td>
             <%= link_to 'Seleccionar', client_path(client), class: 'btn btn-outline-primary' %>
           </td>
