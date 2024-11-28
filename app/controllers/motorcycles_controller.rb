@@ -25,7 +25,7 @@ class MotorcyclesController < ApplicationController
 
     respond_to do |format|
       if @motorcycle.save
-        format.html { redirect_to @motorcycle, notice: "Motorcycle was successfully created." }
+        format.html { redirect_to @motorcycle.client, notice: "Motorcycle was successfully created." }
         format.json { render :show, status: :created, location: @motorcycle }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -49,9 +49,10 @@ class MotorcyclesController < ApplicationController
 
   # DELETE /motorcycles/1 or /motorcycles/1.json
   def destroy
+    client = @motorcycle.client
     @motorcycle.destroy!
     respond_to do |format|
-      format.html { redirect_to motorcycles_path, status: :see_other, notice: "Motorcycle was successfully destroyed." }
+      format.html { redirect_to client, status: :see_other, notice: "Motorcycle was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -64,6 +65,6 @@ class MotorcyclesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def motorcycle_params
-      params.require(:motorcycle).permit(:name, :plate_number, :vin, :service_history, :mileage, :status, :client_id)
+      params.require(:motorcycle).permit(:name, :plate_number, :vin, :service_history, :mileage, :status, :client_id, :motorcycle_picture)
     end
 end

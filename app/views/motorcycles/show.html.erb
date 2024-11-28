@@ -1,5 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
+<p>
+<strong>Foto de la motocicleta:</strong>
+</p>
+
+<% if @motorcycle.motorcycle_picture.present? %>
+  <%= image_tag @motorcycle.motorcycle_picture %>
+<% else %>
+  <p>No hay foto disponible para esta motocicleta.</p>
+<% end %>
+
+
+
 <%= render @motorcycle %>
 
 <div>
