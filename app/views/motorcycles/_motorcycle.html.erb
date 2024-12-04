@@ -1,37 +1,49 @@
-<div id="<%= dom_id motorcycle %>">
-  <p>
-    <strong>Name:</strong>
-    <%= motorcycle.name %>
-  </p>
+<section>
+  <div class="container-fluid">
+    <div class="row ">
 
-  <p>
-    <strong>Plate number:</strong>
-    <%= motorcycle.plate_number %>
-  </p>
-
-  <p>
-    <strong>Vin:</strong>
-    <%= motorcycle.vin %>
-  </p>
-
-  <p>
-    <strong>Service history:</strong>
-    <%= motorcycle.service_history %>
-  </p>
-
-  <p>
-    <strong>Mileage:</strong>
-    <%= motorcycle.mileage %>
-  </p>
-
-  <p>
-    <strong>Status:</strong>
-    <%= motorcycle.status %>
-  </p>
-
-  <p>
-    <strong>Client:</strong>
-    <%= motorcycle.client_id %>
-  </p>
-
-</div>
+      <div class="col-12">
+        <p>
+          <strong class="strong-text">Cliente:</strong><br>
+          <span class="customer-name"><%= motorcycle.client.first_name %> <%= motorcycle.client.last_name %></span>
+        </p>
+      </div>
+      <div class="col-12">
+        <p>
+          <strong class="strong-text">Motocicleta:</strong><br>
+          <span class="customer-name"><%= motorcycle.name %></span>
+        </p>
+      </div>
+      <div class="col-md-6">
+        <p>
+          <strong class="strong-text">Plate number:</strong><br>
+          <span class="customer-name"><%= motorcycle.plate_number %></span>
+        </p>
+      </div>
+      <div class="col-md-6">
+        <p>
+          <strong class="strong-text">Status:</strong><br>
+          <span class="customer-name"><%= motorcycle.status %></span>
+        </p>
+      </div>
+      <div class="col-12">
+        <p>
+          <strong class="strong-text">Vin:</strong><br>
+          <span class="customer-name"><%= motorcycle.vin %></span>
+        </p>
+      </div>
+      <div class="col-md-6">
+        <p>
+          <strong class="strong-text">Service history:</strong><br>
+          <span class="customer-name"><%= motorcycle.service_history %></span>
+        </p>
+      </div>
+      <div class="col-md-6">
+        <p>
+          <strong class="strong-text">Mileage:</strong><br>
+          <span class="customer-name"><%= motorcycle.mileage %></span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

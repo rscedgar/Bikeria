@@ -5,6 +5,7 @@
 
   <%= link_to "Agregar Cliente", new_client_path, class: 'btn btn-primary mb-3' %>
 
+<div class="table-responsive">
   <table class="table">
     <thead>
       <tr>
@@ -27,7 +28,33 @@
           <td><%= client.motorcycles.count %></td>
           <td>
             <% client.motorcycles.each do |motorcycle| %>
-              <p><strong><%= motorcycle.name %>:</strong> <%= motorcycle.status %></p>
+              <p>
+                <strong><%= motorcycle.name %>:</strong> 
+                <% case motorcycle.status %>
+                  <% when 'Recepción' %>
+                    <span class="badge text-bg-primary"><%= motorcycle.status %></span>
+                  <% when 'Diagnóstico Inicial' %>
+                    <span class="badge text-bg-secondary"><%= motorcycle.status %></span>
+                  <% when 'Asignado Mecánico' %>
+                    <span class="badge text-bg-info"><%= motorcycle.status %></span>
+                  <% when 'Pendiente de Piezas' %>
+                    <span class="badge text-bg-warning"><%= motorcycle.status %></span>
+                  <% when 'En Espera de Aprobación del Cliente' %>
+                    <span class="badge text-bg-light"><%= motorcycle.status %></span>
+                  <% when 'En Reparación' %>
+                    <span class="badge text-bg-danger"><%= motorcycle.status %></span>
+                  <% when 'Prueba de Rodaje' %>
+                    <span class="badge text-bg-success"><%= motorcycle.status %></span>
+                  <% when 'Ajuste de Detalles' %>
+                    <span class="badge text-bg-dark"><%= motorcycle.status %></span>
+                  <% when 'Entrega al Cliente' %>
+                    <span class="badge text-bg-success"><%= motorcycle.status %></span>
+                  <% when 'Estado Desconocido' %>
+                    <span class="badge text-bg-secondary"><%= motorcycle.status %></span>
+                  <% else %>
+                    <span class="badge text-bg-info"><%= motorcycle.status %></span>
+                <% end %>
+              </p>
             <% end %>
           </td>
           <td>
@@ -38,4 +65,5 @@
     </tbody>
   </table>
 </div>
+
 

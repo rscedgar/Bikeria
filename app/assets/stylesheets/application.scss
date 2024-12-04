@@ -14,3 +14,28 @@
  *= require_self
  */
 @import "bootstrap";
+
+/*INFO COSTUMERS*/
+.strong-text {
+  color: gray;
+  font-size: small;
+  font-weight: 300;
+}
+
+.customer-name {
+  font-size: large;
+  font-weight: 500;
+}
+
+.customer-info {
+  font-size: medium;
+  font-weight: 500;
+}
+
+/*END INFO COSTUMERS*/
+
+.small-img {
+  width: 100px !important; /* o cualquier tamaño que desees */
+  height: auto;
+  border-radius: 10px;
+}

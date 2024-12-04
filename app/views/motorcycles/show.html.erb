@@ -1,22 +1,26 @@
 <p style="color: green"><%= notice %></p>
 
-<p>
-<strong>Foto de la motocicleta:</strong>
-</p>
+<div class="container">
+  <div class="row ">
+  <h3>Motocicleta:</h3>
+    <div class="col-lg-4 col-md-12 mt-5 text-center">
+      <% if @motorcycle.motorcycle_picture.present? %>
+        <%= image_tag @motorcycle.motorcycle_picture, class: "card-img-top mx-auto d-block img-fluid", style: "max-width: 300px; max-height: auto;" %>
+      <% else %>
+        <img src="https://via.placeholder.com/150" class="card-img-top mx-auto d-block img-fluid" alt="Imagen no disponible" style="max-width: 300px; max-height: auto;">
+      <% end %>
+    </div>
 
-<% if @motorcycle.motorcycle_picture.present? %>
-  <%= image_tag @motorcycle.motorcycle_picture %>
-<% else %>
-  <p>No hay foto disponible para esta motocicleta.</p>
-<% end %>
+    <div class="col-lg-4 col-md-6">
+      <%= render @motorcycle %>
+      <div class="col-12 d-flex justify-content-start">
+        <%= link_to "Editar motocicleta", edit_motorcycle_path(@motorcycle), class: 'btn btn-outline-primary btn-sm mx-1' %>
+        <%= button_to "Eliminar", @client, method: :delete, class: 'btn btn-outline-danger btn-sm mx-1' %>
+      </div>
+    </div>
 
-
-
-<%= render @motorcycle %>
-
-<div>
-  <%= link_to "Edit this motorcycle", edit_motorcycle_path(@motorcycle) %> |
-  <%= link_to "Back to motorcycles", motorcycles_path %>
-
-  <%= button_to "Destroy this motorcycle", @motorcycle, method: :delete %>
+    <div class="col-lg-4 col-md-6 text-center">
+      <%= link_to "Asignar Mecánico", "#", class: "btn btn-primary" %>
+    </div>
+  </div>
 </div>
