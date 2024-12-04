@@ -1,11 +1,13 @@
-<% content_for :title, "New motorcycle" %>
+<div class="container">
+<% content_for :title, "Agregar motocicleta" %>
 
-<h1>New motorcycle</h1>
+<h1>Agregar motocicleta</h1>
 
 <%= render "form", motorcycle: @motorcycle %>
 
 <br>
 
 <div>
-  <%= link_to "Back to motorcycles", motorcycles_path %>
+  <%= link_to "Ver todos las motocicletas", motorcycles_path %>
+</div>
 </div>

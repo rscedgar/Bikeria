@@ -1,12 +1,14 @@
-<% content_for :title, "Editing client" %>
+<div class="container">
+  <% content_for :title, "Editing client" %>
 
-<h1>Editing client</h1>
+  <h1>Editar client</h1>
 
-<%= render "form", client: @client %>
+  <%= render "form", client: @client %>
 
-<br>
+  <br>
 
-<div>
-  <%= link_to "Show this client", @client %> |
-  <%= link_to "Back to clients", clients_path %>
+  <div>
+    <%= link_to "Ver este cliente", @client %> |
+    <%= link_to "Ver todos los clients", clients_path %>
+  </div>
 </div>

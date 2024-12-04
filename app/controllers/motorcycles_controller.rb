@@ -4,6 +4,8 @@ class MotorcyclesController < ApplicationController
   # GET /motorcycles or /motorcycles.json
   def index
     @motorcycles = Motorcycle.all
+    @motorcycles_by_client = @motorcycles.group_by { |motorcycle| motorcycle.client }
+
   end
 
   # GET /motorcycles/1 or /motorcycles/1.json
@@ -13,6 +15,7 @@ class MotorcyclesController < ApplicationController
   # GET /motorcycles/new
   def new
     @motorcycle = Motorcycle.new
+    @user = params["client_id"]
   end
 
   # GET /motorcycles/1/edit

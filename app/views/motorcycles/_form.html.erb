@@ -1,65 +1,98 @@
-<%= form_with(model: motorcycle) do |form| %>
-  <% if motorcycle.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(motorcycle.errors.count, "error") %> prohibited this motorcycle from being saved:</h2>
+<div class="container mt-5">
+  <%= form_with(model: motorcycle) do |form| %>
+    <% if motorcycle.errors.any? %>
+      <div class="alert alert-danger">
+        <h2><%= pluralize(motorcycle.errors.count, "error") %> prohibited this motorcycle from being saved:</h2>
+        <ul>
+          <% motorcycle.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-        <% motorcycle.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <div class="row">
+      <%if  !@user %>
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= form.label :client_id, "Cliente" %>
+            <%= form.select :client_id, Client.all.collect { |client| [client.email, client.id] }, { include_blank: "Selecciona un cliente" }, { class: 'form-control select2' } %>
+          </div>
+        </div>
+      <%else%>
+        <%= form.text_field :client_id, class: 'd-none', value: @user %>
+      <%end%>
+      
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= form.label :name, "Nombre de la moto" %>
+          <%= form.text_field :name, class: 'form-control' %>
+        </div>
+      </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= form.label :motorcycle_picture, "Foto de la moto" %>
+          <%= form.file_field :motorcycle_picture, class: "form-control", id: "formFile" %>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= form.label :plate_number, "Número de placa" %>
+          <%= form.text_field :plate_number, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= form.label :vin, "VIN" %>
+          <%= form.text_field :vin, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= form.label :service_history, "Historial de servicio" %>
+          <%= form.date_field :service_history, value: Date.today.strftime('%d/%m/%Y'), class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= form.label :mileage, "Kilometraje" %>
+          <%= form.number_field :mileage, class: 'form-control' %>
+        </div>
+      </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :status, "Estado", class: "form-label" %>
+        <%= form.select :status, options_for_select([
+          "Recepción",
+          "Diagnóstico Inicial",
+          "Asignado Mecánico",
+          "Pendiente de Piezas",
+          "En Espera de Aprobación del Cliente",
+          "En Reparación",
+          "Prueba de Rodaje",
+          "Ajuste de Detalles",
+          "Entrega al Cliente",
+          "Estado Desconocido"
+        ]), { prompt: 'Seleccione una opción' }, class: 'form-select' %>
+      </div>
+    </div>
+    
+
+    <div class="form-group">
+      <%= form.submit "Guardar moto", class: 'btn btn-primary' %>
+    </div>
+
   <% end %>
-
-  <%= form.collection_select :client_id, Client.all, :id, :email, prompt: "Selecciona un cliente" %>
-
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-  <%= form.label :motorcycle_picture, style: "display: block" %>
-  <%= form.file_field :motorcycle_picture %>
 </div>
-
-  <div>
-    <%= form.label :plate_number, style: "display: block" %>
-    <%= form.text_field :plate_number %>
-  </div>
-
-  <div>
-    <%= form.label :vin, style: "display: block" %>
-    <%= form.text_field :vin %>
-  </div>
-
-  <div>
-    <%= form.label :service_history, style: "display: block" %>
-    <%= form.date_field :service_history, value: Date.today.strftime('%d/%m/%Y'), style: "width: 100%;" %>
-  </div>
-
-  <div>
-    <%= form.label :mileage, style: "display: block" %>
-    <%= form.number_field :mileage %>
-  </div>
-
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.select :status, options_for_select([
-      "Recepción",
-      "Diagnóstico Inicial",
-      "Asignado Mecánico",
-      "Pendiente de Piezas",
-      "En Espera de Aprobación del Cliente",
-      "En Reparación",
-      "Prueba de Rodaje",
-      "Ajuste de Detalles",
-      "Entrega al Cliente",
-      "Estado Desconocido"
-    ]) %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>

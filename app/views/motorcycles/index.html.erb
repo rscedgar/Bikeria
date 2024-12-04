@@ -1,16 +1,69 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+  <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Motorcycles" %>
+  <% content_for :title, "Motorcycles" %>
 
-<h1>Motorcycles</h1>
-
-<div id="motorcycles">
-  <% @motorcycles.each do |motorcycle| %>
-    <%= render motorcycle %>
-    <p>
-      <%= link_to "Show this motorcycle", motorcycle %>
-    </p>
-  <% end %>
+  <h1>Motorcycles</h1>
+  <%= link_to "Agergar motocicleta", new_motorcycle_path, class: 'btn btn-primary' %>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Motos</th>
+          <th>Cliente</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @motorcycles_by_client.each do |client, motorcycles| %>
+          <tr>
+            <td>
+              <ul>
+                <% motorcycles.each do |motorcycle| %>
+                  <li>
+                    <!-- Mostrar la foto de la moto -->
+                    <% if motorcycle.motorcycle_picture.present? %>
+                      <%= image_tag motorcycle.motorcycle_picture, class: 'small-img mb-2', alt: "Imagen de la motocicleta" %>
+                    <% else %>
+                      <img src="https://via.placeholder.com/150" class="small-img mb-2" alt="Imagen no disponible">
+                    <% end %>
+                    <!-- Nombre de la moto -->
+                    <%= motorcycle.name %> - 
+                    <!-- Estado de la moto -->
+                    | Status: 
+                    <% case motorcycle.status %>
+                      <% when 'Recepción' %>
+                        <span class="badge text-bg-primary"><%= motorcycle.status %></span>
+                      <% when 'Diagnóstico Inicial' %>
+                        <span class="badge text-bg-secondary"><%= motorcycle.status %></span>
+                      <% when 'Asignado Mecánico' %>
+                        <span class="badge text-bg-info"><%= motorcycle.status %></span>
+                      <% when 'Pendiente de Piezas' %>
+                        <span class="badge text-bg-warning"><%= motorcycle.status %></span>
+                      <% when 'En Espera de Aprobación del Cliente' %>
+                        <span class="badge text-bg-light"><%= motorcycle.status %></span>
+                      <% when 'En Reparación' %>
+                        <span class="badge text-bg-danger"><%= motorcycle.status %></span>
+                      <% when 'Prueba de Rodaje' %>
+                        <span class="badge text-bg-success"><%= motorcycle.status %></span>
+                      <% when 'Ajuste de Detalles' %>
+                        <span class="badge text-bg-dark"><%= motorcycle.status %></span>
+                      <% when 'Entrega al Cliente' %>
+                        <span class="badge text-bg-success"><%= motorcycle.status %></span>
+                      <% when 'Estado Desconocido' %>
+                        <span class="badge text-bg-secondary"><%= motorcycle.status %></span>
+                      <% else %>
+                        <span class="badge text-bg-info"><%= motorcycle.status %></span>
+                    <% end %>
+                    <!-- Botón "Seleccionar" en lugar de "Detalles" -->
+                    <%= link_to "Seleccionar - #{motorcycle.name}", motorcycle_path(motorcycle), class: 'btn btn-outline-secondary' %>
+                  </li>
+                <% end %>
+              </ul>
+            </td>
+            <td><%= "#{client.first_name} #{client.last_name}" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
-
-<%= link_to "New motorcycle", new_motorcycle_path %>
