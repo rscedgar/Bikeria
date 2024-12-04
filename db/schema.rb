@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_28_131504) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_04_152515) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,21 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_28_131504) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "addresses", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.string "street"
+    t.string "ext_number"
+    t.string "int_number"
+    t.string "municipality"
+    t.string "city"
+    t.string "postal_code"
+    t.string "address_type"
+    t.boolean "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_addresses_on_client_id"
+  end
+
   create_table "clients", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -66,5 +81,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_28_131504) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "addresses", "clients"
   add_foreign_key "motorcycles", "clients"
 end

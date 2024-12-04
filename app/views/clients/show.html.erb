@@ -8,7 +8,7 @@
       <h5>DATOS DEL CLIENTE</h5>
       <%= render @client %>
       <div class="col-12 d-flex justify-content-around mt-2">
-        <%= link_to "Editar clientes", edit_client_path(@client), class: 'btn btn-outline-primary btn-sm mx-1' %>
+        <%= link_to "Editar cliente", edit_client_path(@client), class: 'btn btn-outline-primary btn-sm mx-1' %>
         <%= link_to "Ver clientes", clients_path, class: 'btn btn-outline-secondary btn-sm mx-1' %>
         <%= button_to "Eliminar", @client, method: :delete, class: 'btn btn-outline-danger btn-sm mx-1' %>
       </div>
@@ -19,52 +19,61 @@
       <h5>DIRECCIÓN DE ENTREGA</h5>
       <div class="container mt-4">
         <div class="row">
-          <div class="col-12">
-            <p>
-              <strong class="strong-text">Nombre:</strong><br>
-              <span class="customer-name"></span>
-            </p>
-          </div>
-          <div class="col-12">
-            <p>
-              <strong class="strong-text">Calle:</strong><br>
-              <span class="customer-name"></span>
-            </p>
-          </div>
-          <div class="col-md-6">
-            <p>
-              <strong class="strong-text">No. exterior:</strong><br>
-              <span class="customer-name"></span>
-            </p>
-          </div>
-          <div class="col-md-6">
-            <p>
-              <strong class="strong-text">No. interior:</strong><br>
-              <span class="customer-name"></span>
-            </p>
-          </div>
-          <div class="col-12">
-            <p>
-              <strong class="strong-text">Municipio:</strong><br>
-              <span class="customer-name"></span>
-            </p>
-          </div>
-          <div class="col-md-6">
-            <p>
-              <strong class="strong-text">Ciudad:</strong><br>
-              <span class="customer-name"></span>
-            </p>
-          </div>
-          <div class="col-md-6">
-            <p>
-              <strong class="strong-text">Código postal:</strong><br>
-              <span class="customer-name"></span>
-            </p>
-          </div>
-          <div class="col-12 d-flex justify-content-around mt-2">
-            <button class="btn btn-outline-primary btn-sm">Agregar Dirección</button>
-            <button class="btn btn-outline-secondary btn-sm">Elegir Otra Dirección</button>
-          </div>
+          <% if @client.addresses.where(address_type: 'shipping').any? %>
+            <% @client.addresses.where(address_type: 'shipping').each do |address| %>
+              <% if address.status == true %>
+                <div class="col-12">
+                  <p>
+                    <strong class="strong-text">Nombre:</strong><br>
+                    <%= address.street %>
+                  </p>
+                </div>
+                <div class="col-12">
+                  <p>
+                    <strong class="strong-text">Calle:</strong><br>
+                    <%= address.street %>
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <p>
+                    <strong class="strong-text">No. exterior:</strong><br>
+                    <%= address.ext_number %>
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <p>
+                    <strong class="strong-text">No. interior:</strong><br>
+                    <%= address.int_number %>
+                  </p>
+                </div>
+                <div class="col-12">
+                  <p>
+                    <strong class="strong-text">Municipio:</strong><br>
+                    <%= address.municipality %>
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <p>
+                    <strong class="strong-text">Ciudad:</strong><br>
+                    <%= address.city %>
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <p>
+                    <strong class="strong-text">Código postal:</strong><br>
+                    <%= address.postal_code %>
+                  </p>
+                </div>
+                <div class="col-12 d-flex justify-content-around mt-2">
+                  <%= link_to "Agregar dirección", new_address_path(client_id: @client.id), class: 'btn btn-outline-primary btn-sm mx-1' %>
+                  <%= link_to "Editar direccion", edit_address_path(address), class: 'btn btn-outline-primary btn-sm mx-1' %>
+                </div>
+              <% end %>
+            <% end %>
+          <% else %>
+            <p>No hay direcciones de entrega disponibles.</p>
+            <%= link_to "Agregar dirección", new_address_path(client_id: @client.id), class: 'btn btn-outline-primary btn-sm mx-1' %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -80,65 +89,72 @@
       </div>
       <div id="billing_address">
         <div class="row">
-          <div class="col-12">
-            <p>
-              <strong class="strong-text">Nombre:</strong><br>
-              <span class="customer-name"></span>
-            </p>
-          </div>
-          <div class="col-12">
-            <p>
-              <strong class="strong-text">Calle:</strong><br>
-              <span class="customer-name"></span>
-            </p>
-          </div>
-          <div class="col-md-6">
-            <p>
-              <strong class="strong-text">No. exterior:</strong><br>
-              <span class="customer-name"></span>
-            </p>
-          </div>
-          <div class="col-md-6">
-            <p>
-              <strong class="strong-text">No. interior:</strong><br>
-              <span class="customer-name"></span>
-            </p>
-          </div>
-          <div class="col-12">
-            <p>
-              <strong class="strong-text">Municipio:</strong><br>
-              <span class="customer-name"></span>
-            </p>
-          </div>
-          <div class="col-md-6">
-            <p>
-              <strong class="strong-text">Ciudad:</strong><br>
-              <span class="customer-name"></span>
-            </p>
-          </div>
-          <div class="col-md-6">
-            <p>
-              <strong class="strong-text">Código postal:</strong><br>
-              <span class="customer-name"></span>
-            </p>
-          </div>
-          <div class="col-12 d-flex justify-content-around mt-2">
-            <button class="btn btn-outline-primary btn-sm">Agregar Dirección</button>
-            <button class="btn btn-outline-secondary btn-sm">Elegir Otra Dirección</button>
-          </div>
+          <% if @client.addresses.where(address_type: 'billing').any? %>
+            <% @client.addresses.where(address_type: 'billing').each do |address| %>
+              <% if address.status == true %>
+                <div class="col-12">
+                  <p>
+                    <strong class="strong-text">Nombre:</strong><br>
+                    <%= address.street %>
+                  </p>
+                </div>
+                <div class="col-12">
+                  <p>
+                    <strong class="strong-text">Calle:</strong><br>
+                    <%= address.street %>
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <p>
+                    <strong class="strong-text">No. exterior:</strong><br>
+                    <%= address.ext_number %>
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <p>
+                    <strong class="strong-text">No. interior:</strong><br>
+                    <%= address.int_number %>
+                  </p>
+                </div>
+                <div class="col-12">
+                  <p>
+                    <strong class="strong-text">Municipio:</strong><br>
+                    <%= address.municipality %>
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <p>
+                    <strong class="strong-text">Ciudad:</strong><br>
+                    <%= address.city %>
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <p>
+                    <strong class="strong-text">Código postal:</strong><br>
+                    <%= address.postal_code %>
+                  </p>
+                </div>
+                <div class="col-12 d-flex justify-content-around mt-2">
+                  <%= link_to "Agregar dirección", new_address_path(client_id: @client.id), class: 'btn btn-outline-primary btn-sm mx-1' %>
+                  <%= link_to "Editar direccion", edit_address_path(address), class: 'btn btn-outline-secondary btn-sm mx-1' %>
+                </div>
+              <% end %>
+            <% end %>
+          <% else %>
+            <%= link_to "Agregar dirección", new_address_path(client_id: @client.id), class: 'btn btn-outline-primary btn-sm mx-1' %>
+          <% end %>
         </div>
       </div>
     </div>
-
+    
   </div>
 </div>
-
 
 <hr class="m-5">
 
 <div class="container">
   <h2>Motocicletas</h2>
-  <%= link_to 'Agregar Motocicleta', new_motorcycle_path(client_id: @client.id), class: 'btn btn-primary mt-3 mb-2' %>
+  <%= link_to 'Agregar Motocicleta', new_motorcycle_path, class: 'btn btn-primary mt-3 mb-2' %>
   <div class="row m-3">
     <% if @motorcycles.any? %>
       <div class="row">

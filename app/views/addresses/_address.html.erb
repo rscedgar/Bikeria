@@ -1,0 +1,70 @@
+<section>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-12">
+        <p>
+          <strong class="strong-text">Cliente:</strong><br>
+          <span class="customer-name"><%= address.client.first_name %> <%= address.client.last_name %></span>
+        </p>
+      </div>
+
+      <div class="col-12">
+        <p>
+          <strong class="strong-text">Calle:</strong><br>
+          <span class="customer-name"><%= address.street %></span>
+        </p>
+      </div>
+
+      <div class="col-md-6">
+        <p>
+          <strong class="strong-text">Número exterior:</strong><br>
+          <span class="customer-name"><%= address.ext_number %></span>
+        </p>
+      </div>
+
+      <div class="col-md-6">
+        <p>
+          <strong class="strong-text">Número interior:</strong><br>
+          <span class="customer-name"><%= address.int_number %></span>
+        </p>
+      </div>
+
+      <div class="col-md-6">
+        <p>
+          <strong class="strong-text">Municipio:</strong><br>
+          <span class="customer-name"><%= address.municipality %></span>
+        </p>
+      </div>
+
+      <div class="col-md-6">
+        <p>
+          <strong class="strong-text">Ciudad:</strong><br>
+          <span class="customer-name"><%= address.city %></span>
+        </p>
+      </div>
+
+      <div class="col-md-6">
+        <p>
+          <strong class="strong-text">Código Postal:</strong><br>
+          <span class="customer-name"><%= address.postal_code %></span>
+        </p>
+      </div>
+
+      <div class="col-md-6">
+        <p>
+          <strong class="strong-text">Tipo de dirección:</strong><br>
+          <span class="customer-name"><%= address.address_type %></span>
+        </p>
+      </div>
+
+      <div class="col-12">
+        <p>
+          <strong class="strong-text">Dirección Principal:</strong><br>
+          <span class="customer-name"><%= address.status ? 'Si' : 'No' %></span>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>

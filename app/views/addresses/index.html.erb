@@ -1,0 +1,64 @@
+<div class="container">
+  <p style="color: green"><%= notice %></p>
+
+  <% content_for :title, "Addresses" %>
+
+  <h1>Direcciones</h1>
+  <%= link_to "Agregar dirección", new_address_path, class: 'btn btn-primary mb-3' %>
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>Dirección</th>
+          <th>Cliente</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @addresses_by_client.each do |client, addresses| %>
+          <tr>
+            <td>
+              <ul>
+                <% addresses.each do |address| %>
+                  <li>
+                    <!-- Mostrar la dirección -->
+                    <strong>Calle:</strong> <%= address.street %><br>
+                    <strong>Número Ext.:</strong> <%= address.ext_number %><br>
+                    <strong>Número Int.:</strong> <%= address.int_number.presence || "N/A" %><br>
+                    <strong>Municipio:</strong> <%= address.municipality %><br>
+                    <strong>Ciudad:</strong> <%= address.city %><br>
+                    <strong>Código Postal:</strong> <%= address.postal_code %><br>
+
+                    <!-- Tipo de dirección -->
+                    <strong>Tipo:</strong> 
+                    <% case address.address_type %>
+                      <% when 'billing', 'Facturación' %>
+                        <span class="badge text-bg-primary">Facturación</span>
+                      <% when 'shipping', 'Envío' %>
+                        <span class="badge text-bg-info">Envío</span>
+                      <% else %>
+                        <span class="badge text-bg-light">Desconocido</span>
+                    <% end %><br>
+
+                    <!-- Estado de la dirección -->
+                    <strong>Dirección principal:</strong> 
+                    <% if address.status %>
+                      <span class="badge text-bg-success">Sí</span>
+                    <% else %>
+                      <span class="badge text-bg-danger">No</span>
+                    <% end %><br>
+
+                    <!-- Botón "Seleccionar" -->
+                    <%= link_to "Seleccionar", address_path(address), class: 'btn btn-outline-secondary btn-sm mt-3 mb-3' %>
+                    <hr>
+                  </li>
+                <% end %>
+              </ul>
+            </td>
+            <td><%= "#{client.first_name} #{client.last_name}" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
