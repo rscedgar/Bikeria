@@ -1,0 +1,126 @@
+<div class="container-fluid">
+  <div class="container mt-4">
+    <%= form_with(model: address) do |form| %>
+      <% if address.errors.any? %>
+        <div class="alert alert-danger">
+          <h2><%= pluralize(address.errors.count, "error") %> prohibited this address from being saved:</h2>
+          <ul>
+            <% address.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="row">
+        <div class="col-12">
+          <% if @user_address.blank? %>
+            <div class="form-group">
+              <%= form.label :client_id, "Cliente" %>
+              <%= form.select :client_id, Client.all.collect { |client| [client.email, client.id] }, { include_blank: "Selecciona un cliente" }, { class: 'form-control select2' } %>
+            </div>
+          <% else %>
+            <%= form.text_field :client_id, class: 'd-none', value: @user_address %>
+          <% end %>
+        </div>
+
+        <div class="col-12">
+          <div class="form-group">
+            <%= form.label :street, "Calle" %>
+            <%= form.text_field :street, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= form.label :ext_number, "Número exterior" %>
+            <%= form.text_field :ext_number, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= form.label :int_number, "Número interior" %>
+            <%= form.text_field :int_number, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-group">
+            <%= form.label :municipality, "Estado" %>
+            <%= form.select :municipality, [
+              ['Selecciona un estado', nil],
+              ['Aguascalientes', 'Aguascalientes'],
+              ['Baja California', 'Baja California'],
+              ['Baja California Sur', 'Baja California Sur'],
+              ['Campeche', 'Campeche'],
+              ['Chiapas', 'Chiapas'],
+              ['Chihuahua', 'Chihuahua'],
+              ['Coahuila', 'Coahuila'],
+              ['Colima', 'Colima'],
+              ['Durango', 'Durango'],
+              ['Guanajuato', 'Guanajuato'],
+              ['Guerrero', 'Guerrero'],
+              ['Hidalgo', 'Hidalgo'],
+              ['Jalisco', 'Jalisco'],
+              ['México', 'México'],
+              ['Michoacán', 'Michoacán'],
+              ['Morelos', 'Morelos'],
+              ['Nayarit', 'Nayarit'],
+              ['Nuevo León', 'Nuevo León'],
+              ['Oaxaca', 'Oaxaca'],
+              ['Puebla', 'Puebla'],
+              ['Querétaro', 'Querétaro'],
+              ['Quintana Roo', 'Quintana Roo'],
+              ['San Luis Potosí', 'San Luis Potosí'],
+              ['Sinaloa', 'Sinaloa'],
+              ['Sonora', 'Sonora'],
+              ['Tabasco', 'Tabasco'],
+              ['Tamaulipas', 'Tamaulipas'],
+              ['Tlaxcala', 'Tlaxcala'],
+              ['Veracruz', 'Veracruz'],
+              ['Yucatán', 'Yucatán'],
+              ['Zacatecas', 'Zacatecas']
+            ], { include_blank: 'Selecciona un estado' }, { class: 'form-control select2' } %>
+          </div>
+        </div>
+      
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= form.label :city, "Ciudad" %>
+            <%= form.text_field :city, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= form.label :postal_code, "Código Postal" %>
+            <%= form.text_field :postal_code, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="col-md-6 mt-2">
+          <div class="form-group">
+            <%= form.label :address_type, "Tipo de dirección" %>
+            <%= form.select :address_type, [['Selecciona una opción', nil], ['Facturación', 'billing'], ['Envío', 'shipping']], { include_blank: 'Selecciona una opción' }, { class: 'form-control select2' } %>
+          </div>
+        </div>
+      
+    
+        <div class="col-md-6 mt-2">
+          <div class="form-group">
+            <%= form.label :status, "¿Es la dirección principal?" %>
+            <%= form.select :status, [['Selecciona una opción', nil], ['Sí', true], ['No', false]], { include_blank: 'Selecciona una opción' }, { class: 'form-control select2' } %>
+          </div>
+        </div>
+      
+        <div class="col-12">
+          <div class="form-group">
+            <%= form.submit "Guardar dirección", class: 'btn btn-primary mt-3' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
